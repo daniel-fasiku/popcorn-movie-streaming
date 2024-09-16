@@ -1,0 +1,7 @@
+.main-content-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding-top: 30px;
+}

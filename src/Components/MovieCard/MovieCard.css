@@ -1,0 +1,33 @@
+.movie-card-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    border-bottom: 1px solid #343a40;
+}
+.movie-card-image {
+    height: 60px;
+    width: 40px;
+}
+.movie-card-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+    cursor: pointer;
+}
+.movie-card-text1 {
+    margin: 0;
+    color: #dee2e6;
+}
+.movie-card-text2-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.movie-card-text2 {
+    color: #dee2e6;
+    font-size: 14px;
+}

@@ -1,0 +1,50 @@
+.watched-movies-container {
+    background-color: #2b3035;
+    border-radius: 9px;
+    width: 40rem;
+    position: relative;
+}
+.watched-movies-collapse-button {
+    color: #dee2e6;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #212529;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 6;
+}
+.total-watched-movies-container {
+    padding: 33px 40px;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #343a40;
+    box-shadow: 0px 32px 24px rgba(0, 0, 0, 0.1);
+}
+.total-movies-text1 {
+    margin: 0;
+    color: #dee2e6;
+}
+.total-movies-stats {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.stat-text {
+    margin: 0;
+    color: #dee2e6;
+    font-weight: 500;
+    font-size: 14px;
+}

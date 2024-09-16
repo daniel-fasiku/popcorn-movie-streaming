@@ -1,0 +1,28 @@
+.movie-list {
+    background-color: #2b3035;
+    padding: 0px 0px;
+    border-radius: 9px;
+    width: 40rem;
+    position: relative;
+}
+
+.movie-list-collapse-button {
+    color: #dee2e6;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #212529;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+}

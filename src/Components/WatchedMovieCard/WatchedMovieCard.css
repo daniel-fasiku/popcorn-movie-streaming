@@ -1,0 +1,31 @@
+.wm-card-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #343a40;
+}
+.wm-card-image {
+    height: 60px;
+}
+.wm-card-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.wm-card-text1 {
+    margin: 0;
+    color: #dee2e6;
+}
+.wm-card-text2-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.wm-card-text2 {
+    color: #dee2e6;
+    font-size: 14px;
+    margin: 0;
+}
