@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { tempMovieData } from "../../data";
 import MovieCard from "../MovieCard/MovieCard";
 import './MovieList.css'
 
-const MovieList = ({ movieList, loading, error, errorCheck }) => {
+const MovieList = ({ movieList, loading, error, errorCheck, handleStoreMovieId }) => {
   const [showMovieList, setShowMovieList] = useState(true)
 
   return (
@@ -23,7 +22,7 @@ const MovieList = ({ movieList, loading, error, errorCheck }) => {
             showMovieList && (
               <>
                 {
-                  movieList?.map((item, index) => (<MovieCard key={index} item={item} image={item.Poster} title={item.Title} releaseYear={item.Year} />))
+                  movieList?.map((item, index) => (<MovieCard key={index} id={item.imdbID} item={item} image={item.Poster} title={item.Title} releaseYear={item.Year} handleStoreMovieId={handleStoreMovieId} />))
                 }
               </>
             )
