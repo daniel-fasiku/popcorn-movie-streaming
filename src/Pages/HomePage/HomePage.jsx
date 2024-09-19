@@ -14,7 +14,8 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
-  const [errorCheck, setErrorCheck] = useState(false)
+  const [errorCheck, setErrorCheck] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState("")
 
   const tempQuery = query || "interstellar"
 
@@ -38,11 +39,16 @@ const HomePage = () => {
         setError(error.message)
         console.error(error.message)
       } finally {
-        setLoading(false)
+        setLoading(false);
+        setError("")
       }
     };
     fetchMoviesData();
   }, [tempQuery]);
+
+  const handleStoreMovieId = (id) => {
+    setSelectedMovieId((prev) => prev !== id ? id : null)
+  }
 
 
 
@@ -58,7 +64,7 @@ const HomePage = () => {
         <p className="nav-text">Found {movieList?.length} results</p>
       </NavBar>
       <MainContent>
-        <MovieList movieList={movieList} loading={loading} error={error} errorCheck={errorCheck} />
+        <MovieList movieList={movieList} loading={loading} error={error} errorCheck={errorCheck} handleStoreMovieId={handleStoreMovieId} />
         <WatchedMovies />
       </MainContent>
     </div>
