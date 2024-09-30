@@ -25,6 +25,8 @@
     z-index: 6;
 }
 .total-watched-movies-container {
+}
+.total-watched-movies-stats-wrapper {
     padding: 33px 40px;
     border-radius: 9px;
     display: flex;
@@ -47,4 +49,52 @@
     color: #dee2e6;
     font-weight: 500;
     font-size: 14px;
+}
+.back-button {
+    background-color: #212529;
+    border: none;
+    border-radius: 150px;
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: #dee2e6;
+    cursor: pointer;
+}
+.watched-movies-list-wrapper {
+    margin-top: 20px;
+}
+.watched-movie-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #343a40;
+}
+.watched-movie-poster {
+    height: 60px;
+}
+.watched-movie-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.watched-movie-text1 {
+    margin: 0;
+    color: #dee2e6;
+}
+.watched-movie-text2-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.watched-movie-text2 {
+    color: #dee2e6;
+    font-size: 14px;
+    margin: 0;
 }

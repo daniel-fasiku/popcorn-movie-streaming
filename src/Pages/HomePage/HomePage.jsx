@@ -15,14 +15,18 @@ const HomePage = () => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [errorCheck, setErrorCheck] = useState(false);
-  const [selectedMovieId, setSelectedMovieId] = useState("")
+  const [selectedMovieId, setSelectedMovieId] = useState("");
+  const [watchedMoviesList, setWatchedMoviesList] = useState([]);
 
-  const tempQuery = query || "interstellar"
-
+  const tempQuery = query || "interstellar";
+  
   useEffect(() => {
+    setSelectedMovieId(null);
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchMoviesData = async () => {
       try {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&s=${tempQuery}`);
+        const response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&s=${tempQuery}`, { signal });
         console.log(response.data)
         if (response.data.Response === "False") {
           setLoading(false)
@@ -36,19 +40,29 @@ const HomePage = () => {
           setLoading(false);
         }
       } catch (error) {
-        setError(error.message)
-        console.error(error.message)
+        setError(error.message);
+        console.error(error.message);
       } finally {
         setLoading(false);
         setError("")
       }
     };
     fetchMoviesData();
+
+    return () => {
+      controller.abort(); 
+    }
   }, [tempQuery]);
 
   const handleStoreMovieId = (id) => {
     setSelectedMovieId((prev) => prev !== id ? id : null)
-  }
+  };
+
+
+ 
+  
+  
+
 
 
 
@@ -65,7 +79,7 @@ const HomePage = () => {
       </NavBar>
       <MainContent>
         <MovieList movieList={movieList} loading={loading} error={error} errorCheck={errorCheck} handleStoreMovieId={handleStoreMovieId} />
-        <WatchedMovies />
+        <WatchedMovies selectedMovieId={selectedMovieId} setSelectedMovieId={setSelectedMovieId} apiKey={apiKey} movieList={movieList} watchedMoviesList={watchedMoviesList} setWatchedMoviesList={setWatchedMoviesList} />
       </MainContent>
     </div>
   )

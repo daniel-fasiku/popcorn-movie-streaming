@@ -1,20 +1,27 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StarRating } from "star-product-rating";
 import './WatchedMovieCard.css';
 
-const WatchedMovieCard = ({image, title, imbRating, userRating, watchTime}) => {
-    const [storedRating, setStoredRating] = useState(2);
-
+const WatchedMovieCard = ({ id, image, title, releaseDate, runTime, filmType, imdbRating, moviePlot, actors, director, addMovieToList, storedRating, setStoredRating}) => {
     return (
-        <div className='wm-card-container'>
-            <img src={image} alt="movie-img" className="wm-card-image" />
-            <div className="wm-card-text-wrapper">
-                <h4 className="wm-card-text1">{title}</h4>
-                <div className="wm-card-text2-wrapper">
-                    <StarRating size={16} starLength={5} disabled defaultRating={storedRating} newRating={setStoredRating} color='yellow'  />
-                    <p className="wm-card-text2">🌟 {userRating}</p>
-                    <p className="wm-card-text2">⌛ {watchTime} min</p>
+        <div className='wm-card-container' key={id}>
+            <div className="wm-card-top">
+                <img src={image} alt="wm-image" className="wm-card-top-image" />
+                <div className="wm-card-top-text-wrapper">
+                    <h3 className="wm-card-top-text1">{title}</h3>
+                    <p className="wm-card-top-text2">{releaseDate} . {runTime}</p>
+                    <p className="wm-card-top-text2">{filmType}</p>
+                    <p className="wm-card-top-text2">⭐ {imdbRating} IMDb Rating</p>
                 </div>
+            </div>
+            <div className="wm-card-rating">
+                <StarRating defaultRating={storedRating} color='gold' starLength={10} starTextStyle={{display: 'none'}} newRating={setStoredRating} />
+                <button onClick={() => addMovieToList()} className='wm-card-rating-button'>+ Add to list</button>
+            </div>
+            <div className="wm-card-bottom">
+                <p className="wm-card-bottom-text1">{moviePlot}</p>
+                <p className="wm-card-bottom-text2">{actors}</p>
+                <p className="wm-card-bottom-text2">Directed by {director}</p>
             </div>
         </div>
     )
