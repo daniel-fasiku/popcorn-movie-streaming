@@ -6,6 +6,10 @@
     padding-bottom: 30px;
     padding-top: 20px;
     border-bottom: 1px solid #343a40;
+    transition: background-color 0.25s ease;
+}
+.movie-card-container:hover {
+    background-color: #343a40;
 }
 .movie-card-image {
     height: 60px;
