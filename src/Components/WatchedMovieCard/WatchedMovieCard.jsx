@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { StarRating } from "star-product-rating";
 import './WatchedMovieCard.css';
 
-const WatchedMovieCard = ({ id, image, title, releaseDate, runTime, filmType, imdbRating, moviePlot, actors, director, addMovieToList, storedRating, setStoredRating}) => {
+const WatchedMovieCard = ({ id, image, title, releaseDate, runTime, filmType, imdbRating, moviePlot, actors, director, addMovieToList, storedRating, setStoredRating, setRateAttempts}) => {
+    const countRating = useRef(0);
+
+    useEffect(() => {
+        if (storedRating) {
+            countRating.current = countRating.current++ ;
+        }
+        console.log(countRating.current)
+        setRateAttempts.current = countRating.current;
+    }, [storedRating]);
+
+
     return (
         <div className='wm-card-container' key={id}>
             <div className="wm-card-top">

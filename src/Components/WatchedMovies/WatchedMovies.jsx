@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { tempWatchedData } from "../../data";
 import WatchedMovieCard from "../WatchedMovieCard/WatchedMovieCard";
 import StarRating from "star-product-rating";
@@ -13,6 +13,8 @@ const WatchedMovies = ({ selectedMovieId, apiKey, watchedMoviesList, movieList, 
   const [loading, setLoading] = useState(false);
   const [showWatchedMovies, setShowWatchedMovies] = useState(true);
   const [storedRating, setStoredRating] = useState(0);
+  const setRateAttempts = useRef(null);
+  
 
 
   useEffect(() => {
@@ -66,6 +68,7 @@ const WatchedMovies = ({ selectedMovieId, apiKey, watchedMoviesList, movieList, 
       runtime: watchedMovies.Runtime,
       imdbRating: watchedMovies.imdbRating,
       userRating: storedRating,
+      rateAttempts: setRateAttempts.current
     }
     setWatchedMoviesList((prev) => [...prev, data]);
     setSelectedMovieId(null);
@@ -87,11 +90,20 @@ const WatchedMovies = ({ selectedMovieId, apiKey, watchedMoviesList, movieList, 
         event.code === "Escape" && setSelectedMovieId(null)
       })
     }
-  }, [setSelectedMovieId])
+  }, [setSelectedMovieId]);
+
+  useEffect(() => {
+    localStorage.setItem("watchedMovies", JSON.stringify(watchedMoviesList))
+  }, [watchedMoviesList]);
+
+  const handleDeleteWatchedMovie = (id) => {
+    setWatchedMoviesList((prev) => prev.filter((item) => item.imdbID !== id));
+  };
 
 
   const averageMovieRating = movies?.map((item) => item.userRating).reduce((acc, item) => acc + item / movies.length, 0);
   const averageImdbRating = movies?.map((item) => item.imdbRating).reduce((acc, item) => acc + item / movies.length, 0);
+  const totalWatchTime = movies?.map((item) => parseInt(item.runtime)).reduce((acc, item) => acc + item, 0);
   const displaySelectedMovie = Object.keys(watchedMovies).length > 2
   console.log(averageMovieRating)
 
@@ -108,7 +120,7 @@ const WatchedMovies = ({ selectedMovieId, apiKey, watchedMoviesList, movieList, 
           ) : (
             selectedMovieId ? (
               displaySelectedMovie ? (
-                <WatchedMovieCard key={watchedMovies?.imdbID} storedRating={storedRating} setStoredRating={setStoredRating} addMovieToList={addMovieToList} image={watchedMovies?.Poster} title={watchedMovies?.Title} releaseDate={watchedMovies?.Released} runTime={watchedMovies?.Runtime} filmType={watchedMovies?.Genre} imdbRating={watchedMovies?.imdbRating} moviePlot={watchedMovies?.Plot} actors={watchedMovies?.Actors} director={watchedMovies?.Director} />
+                <WatchedMovieCard key={watchedMovies?.imdbID} storedRating={storedRating} setStoredRating={setStoredRating} addMovieToList={addMovieToList} image={watchedMovies?.Poster} title={watchedMovies?.Title} releaseDate={watchedMovies?.Released} runTime={watchedMovies?.Runtime} filmType={watchedMovies?.Genre} imdbRating={watchedMovies?.imdbRating} moviePlot={watchedMovies?.Plot} actors={watchedMovies?.Actors} director={watchedMovies?.Director} setRateAttempts={setRateAttempts} />
               ) : (
                 <>
                   <div className='error-message-container'>
@@ -124,12 +136,12 @@ const WatchedMovies = ({ selectedMovieId, apiKey, watchedMoviesList, movieList, 
                     <p className="stat-text">🎬 {movies.length} movies</p>
                     <p className="stat-text">⭐ {averageMovieRating.toFixed(1)}</p>
                     <p className="stat-text">🌟 {averageImdbRating.toFixed(1)}</p>
-                    <p className="stat-text">⌛ 132 min</p>
+                    <p className="stat-text">⌛ {totalWatchTime} min</p>
                   </div>
                 </div>
                 <div className="watched-movies-list-wrapper">
                   {
-                    movies.map(({ imdbID, Poster, Title, userRating, runtime }) => (
+                    watchedMoviesList.map(({ imdbID, Poster, Title, userRating, runtime }) => (
                       <div key={imdbID} className="watched-movie-wrapper">
                         <img src={Poster} alt="poster" className="watched-movie-poster" />
                         <div className="watched-movie-text-wrapper">
@@ -139,6 +151,7 @@ const WatchedMovies = ({ selectedMovieId, apiKey, watchedMoviesList, movieList, 
                             <p className="watched-movie-text2">⌛ {runtime}</p>
                           </div>
                         </div>
+                        <button onClick={() => handleDeleteWatchedMovie(imdbID)} className="watched-movie-delete-button">Delete</button>
                       </div>
                     ))
                   }

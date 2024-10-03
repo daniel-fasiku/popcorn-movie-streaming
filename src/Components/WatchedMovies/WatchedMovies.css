@@ -83,6 +83,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-grow: 1;
 }
 .watched-movie-text1 {
     margin: 0;
@@ -97,4 +98,17 @@
     color: #dee2e6;
     font-size: 14px;
     margin: 0;
+}
+.watched-movie-delete-button {
+    background-color: #7950f2;
+    border: none;
+    width: fit-content;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #dee2e6; 
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    margin-right: 20px;
 }
